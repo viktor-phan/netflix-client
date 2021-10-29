@@ -5,8 +5,12 @@ import {
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
 import { ListItem } from "../listItem/ListItem";
-
-export const List = () => {
+interface listObj {
+  title: string;
+  genre: string;
+}
+export const List = ({ list }: any) => {
+  console.log(list);
   const [slideNumber, setSlideNumber] = useState(0);
   const [isMoved, setIsMoved] = useState(false);
   const listRef: any = useRef();
@@ -25,22 +29,17 @@ export const List = () => {
   };
   return (
     <div className="list">
-      <span className="listTitle">Continue to watch</span>
+      <span className="listTitle">{list.title}</span>
       <div className="wrapper">
         <ArrowBackIosOutlined
           className="sliderArrow left"
           onClick={() => handleClick("left")}
-          style={{ display: !isMoved as any && "none" }}
+          style={{ display: (!isMoved as any) && "none" }}
         />
         <div className="container" ref={listRef}>
-          <ListItem index={0}/>
-          <ListItem index={1}/>
-          <ListItem index={2}/>
-          <ListItem index={3}/>
-          <ListItem index={4}/>
-          <ListItem index={5}/>
-          <ListItem index={6}/>
-          <ListItem index={7}/>
+          {list.content.map((item: any, i: any) => {
+            return <ListItem index={i} item={item} />;
+          })}
         </div>
         <ArrowForwardIosOutlined
           className="sliderArrow right"

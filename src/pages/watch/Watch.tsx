@@ -1,15 +1,27 @@
 import "./watch.scss";
 import React from "react";
+import { withRouter } from "react-router";
 import { ArrowBackOutlined } from "@material-ui/icons";
+import { Link, useLocation } from "react-router-dom";
 
-export const Watch = () => {
+const Watch = () => {
+  const location: any = useLocation();
+  console.log(location);
   return (
     <div className="watch">
-      <div className="back">
-        <ArrowBackOutlined />
-        Home
-      </div>
-      <video src="asdf" className="video" autoPlay  controls />
+      <Link to="/">
+        <div className="back">
+          <ArrowBackOutlined />
+          Home
+        </div>
+      </Link>
+      <video
+        src={location.state.movie.video}
+        className="video"
+        autoPlay
+        controls
+      />
     </div>
   );
 };
+export default Watch;
